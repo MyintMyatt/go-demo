@@ -8,5 +8,4 @@
 - Musics
 - Others
 
-
-![gif](../res/file_organizer.gif)
+![file organizer](https://raw.githubusercontent.com/MyintMyatt/go-mini-projects/refs/heads/file-organizer/res/file_organizer.gif)
