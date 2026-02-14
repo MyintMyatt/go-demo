@@ -1,19 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"rsc.io/quote"
-	"orion.com/go-basic/greeting"
-)
-
-
+import "fmt"
 
 func main(){
-	fmt.Println("hello, let's start go.")
-	fmt.Println(quote.Hello())
-	hello()
-	
-
-	returnMsg := greeting.SayGreeting("Orion") 
-	fmt.Println(returnMsg)
+	fmt.Println("Hello")
 }
