@@ -26,14 +26,13 @@ func main(){
 
 
 	for i := 0; i <=100 ; i++{
-		fmt.Println(i,"အရမ်းအရမ်းချစ်တယ်☘️❤️🤍")
 	}
 
 }
 
 func checkErr(err error){
    if err != nil{
-		 fmt.Printf("Error happened %s \n", a ...any)
+		 fmt.Printf("Error happened %s \n", err)
 	 }
 }
 
