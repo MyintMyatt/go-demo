@@ -7,6 +7,7 @@ import (
 	"os"
   "path/filepath"
 	"time"
+	"github.com/schollz/progressbar/v3"
 )
 
 func main(){
@@ -33,10 +34,16 @@ func organizeFolder(targetFolder string){
 		fmt.Println("reading folder error: " , err)
 		os.Exit(1)
 	}
-
+  var files []os.DirEntry
+	for _, entry := range filesNFolders {
+		if !entry.IsDir() {
+			files = append(files, entry)
+		}
+	}
 	noOfFiles := 0
 	start := time.Now()
-	
+	// total files
+	bar := progressbar.Default(int64(len(files)))
 	for _, filesNFolder := range filesNFolders{
 		// check folder or file , if folder , we don't organize
 	   if !filesNFolder.IsDir(){
@@ -54,33 +61,29 @@ func organizeFolder(targetFolder string){
 					newPath := filepath.Join(targetFolder, "Images", fileInfo.Name())
 					err := os.Rename(oldPath, newPath)
 					check(err)
-					fmt.Println(fileInfo.Name(), "is moved to ./Images")
           noOfFiles++
 				case ".mp4", ".mov", ".avi", ".amv":
 					newPath := filepath.Join(targetFolder, "Videos", fileInfo.Name())
 					err := os.Rename(oldPath, newPath)
 					check(err)
-          fmt.Println(fileInfo.Name(), "is moved to ./Videos")
 					noOfFiles++
 				case ".pdf", ".docx", ".csv", ".xlsx":
 				  newPath := filepath.Join(targetFolder, "Docs", fileInfo.Name())
 				  err = os.Rename(oldPath, newPath)
 				  check(err)
-					fmt.Println(fileInfo.Name(), "is moved to ./Docs")
 				  noOfFiles++
 			  case ".mp3", ".wav", ".aac":
 				  newPath := filepath.Join(targetFolder, "Music", fileInfo.Name())
 			   	err = os.Rename(oldPath, newPath)
 				  check(err)
-					fmt.Println(fileInfo.Name(), "is moved to ./Music")
 				  noOfFiles++
 			  default:
 				  newPath := filepath.Join(targetFolder, "Others", fileInfo.Name())
 				  err = os.Rename(oldPath, newPath)
 			  	check(err)
-					fmt.Println(fileInfo.Name(), "is moved to ./Others")
 				  noOfFiles++
 				}
+				bar.Add(1)
 		 }
  	}
 
